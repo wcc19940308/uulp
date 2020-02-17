@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="35a1c10a-4267-41c2-8e34-c6cf3df274e8" name="tecent" url="http://123.207.38.216">
+        <fileTransfer host="123.207.38.216" port="22" rootFolder="/home/ubuntu/unix-programming/chapter5" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
