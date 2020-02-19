@@ -21,6 +21,6 @@ int execute(char **);
 
 void fatal(char *, char *, int);
 
-int process();
+int process(char **);
 
 #endif; //C_CODING_SMSH_H
