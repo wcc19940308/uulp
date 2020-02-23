@@ -21,7 +21,7 @@ void sanitize(char *);
 int main(int argc, char **argv) {
     struct sockaddr_in saddr;
     int sock_id, sock_fd; // 服务端自己绑定的socket以及连接过来的客户端socket
-    FILE *sock_fpi, *sock_fpo;
+    FILE *sock_fpi, *sock_fpo; // 对客户端socket的读写文件指针
     FILE *pipe_fp;
     char dirname[BUFSIZ];
     char command[BUFSIZ];

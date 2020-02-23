@@ -5,6 +5,8 @@
 #ifndef C_CODING_SMSH_H
 #define C_CODING_SMSH_H
 
+#include <stdio.h>
+
 #define YES 1
 #define NO 0
 

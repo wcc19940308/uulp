@@ -30,11 +30,12 @@ char *next_cmd(char *prompt, FILE *fp) {
     if (c == EOF && pos == 0)
         return NULL;
     buf[pos] = '\0';
-    return buf;
+    return buf; // 这里是malloc的，所以可以返回
 }
 
 #define is_delim(x) ((x) == ' ' || (x) == '\t')
 
+// 这其实就是一个简版的java的split
 char **splitline(char *line) {
 
     char *newstr();
@@ -55,16 +56,19 @@ char **splitline(char *line) {
     bufspace = BUFSIZ;
     spots = BUFSIZ / sizeof(char *);
 
+    // 对输入的命令进行切分
     while (*cp != '\0') {
         while (is_delim(*cp))
             cp++;
         if (*cp == '\0')
             break;
+        // execvp调用要求最后一位为NULL
         if (argnum + 1 >= spots) {
-            argnum = erealloc(args, bufspace + BUFSIZ);
+            args = erealloc(args, bufspace + BUFSIZ);
             bufspace += BUFSIZ;
             spots += (BUFSIZ / sizeof(char *));
         }
+        // 根据空格切分，找到每段的起始位置，分配内存
         start = cp;
         len = 1;
         while (*++cp != '\0' && !(is_delim(*cp)))
@@ -94,6 +98,7 @@ void freelist(char **list) {
 
 void *emalloc(size_t n) {
     void *rv;
+    // 这边的rv是在堆上分配的内存，因此返回的指针有效
     if ((rv = malloc(n)) == NULL)
         fatal("out of memory", "", 1);
     return rv;

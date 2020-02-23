@@ -11,6 +11,7 @@
 int assign(char *);
 int okname(char *);
 
+// 判断set，赋值，export三种内置命令
 int builtin_command(char **args, int *resultp)
 /*
  * purpose: run a builtin command
@@ -73,5 +74,6 @@ int okname(char *str)
             || !(isalnum(*cp) || *cp == '_'))
             return 0;
     }
+    // 如果是空字符串则返回0
     return (cp != str);    /* no empty strings, either */
 }

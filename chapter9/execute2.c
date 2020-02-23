@@ -23,7 +23,9 @@ int execute(char *argv[])
     if ( (pid = fork())  == -1 )
         perror("fork");
     else if ( pid == 0 ){
+        // 创建子进程的时候将当前父进程表中的内容复制到环境中，以传递给子进程
         environ = VLtable2environ();
+        // 子进程相应信号，但是父进程屏蔽，为了保证子进程退出后shell不会退出
         signal(SIGINT, SIG_DFL);
         signal(SIGQUIT, SIG_DFL);
         execvp(argv[0], argv);
@@ -34,5 +36,7 @@ int execute(char *argv[])
         if ( wait(&child_info) == -1 )
             perror("wait");
     }
+    // 这里子进程成功执行，因此返回状态为0
+    printf("%d\n", child_info); // 这里为什么会返回0？
     return child_info;
 }

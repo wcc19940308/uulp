@@ -6,16 +6,17 @@
 #include <string.h>
 #include "smsh.h"
 
-
-enum states   { NEUTRAL, WANT_THEN, THEN_BLOCK }; // 正常区，执行完if需要then，根据if的结果判断是否执行then下面的内容
+// if之前，then之前，fi之前三块
+enum states   { NEUTRAL, WANT_THEN, THEN_BLOCK };
 enum results  { SUCCESS, FAIL };
 
 static int if_state  = NEUTRAL; // 中立区
-static int if_result = SUCCESS;
+static int if_result = SUCCESS; // if的结果是否成功
 static int last_stat = 0;
 
 int	syn_err(char *);
 
+// 通过分模块，实现简单的语法解析
 int ok_to_execute()
 /*
  * purpose: determine the shell should execute a command
@@ -45,7 +46,9 @@ int is_control_command(char *s)
  * returns: 0 or 1
  */
 {
-    return (strcmp(s, "if") == 0 || strcmp(s, "then") == 0 || strcmp(s, "fi") == 0);
+    return (strcmp("if", s) == 0 ||
+            strcmp("then", s) == 0 ||
+            strcmp("fi", s) == 0);
 }
 
 

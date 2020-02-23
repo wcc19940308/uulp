@@ -34,6 +34,7 @@ int main()
 	return 0;
 }
 
+
 void setup()
 /*
  * purpose: initialize shell
@@ -41,7 +42,7 @@ void setup()
  */
 {
 	extern char **environ;
-
+	// 启动时已经先将环境中的值复制到表中了,用于set或者进行修改
 	VLenviron2table(environ);
 	signal(SIGINT,  SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);

@@ -27,6 +27,7 @@
 #include	"varlib.h"
 #include	<string.h>
 
+// tab的最大长度，如果换成链表则可以没有上线
 #define	MAXVARS	200		/* a linked list would be nicer */
 
 struct var {
@@ -50,6 +51,7 @@ int VLstore(char *name, char *val)
     char *s;
     int rv = 1;
 
+    // 找到空槽，然后新建字符插入
     /* find spot to put it              and make new string */
     if ((itemp = find_item(name, 1)) != NULL && (s = new_string(name, val)) != NULL) {
         if (itemp->str)        /* has a val?	*/
@@ -101,7 +103,7 @@ int VLexport( char *name )
 		rv = 0;
 	}
 	else if ( VLstore(name, "") == 1 )
-		rv = VLexport(name);
+		rv = VLexport(name); // (只有当内存错误的时候会执行到这里，似乎这样处理不太合适)
 	return rv;
 }
 
